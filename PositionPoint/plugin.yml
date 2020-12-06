@@ -1,0 +1,7 @@
+name: Hotspot
+version: 1.0
+main: hotspot.Main
+
+commands:
+  /spot:
+  /go:

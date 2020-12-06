@@ -1,5 +1,6 @@
 package hotspot;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,8 +24,9 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         System.out.println("Hotspot is activated");
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
-
+    
     @Override
     public void onDisable() {
         System.out.println("Hotspot is deactivated");
@@ -102,7 +105,11 @@ public class Main extends JavaPlugin implements Listener {
     public void playerInteract(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         if (player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("spot list")) {
-
+            if (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+                for (int i = 0; i < spot.size(); i++) {
+                    player.sendMessage((i + 1) + ": " + spot.get(i));
+                }
+            }
         }
     }
 }
