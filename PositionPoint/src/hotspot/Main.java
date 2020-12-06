@@ -79,7 +79,7 @@ public class Main extends JavaPlugin implements Listener, TabCompleter {
             }
         }
         else if (command.getName().equalsIgnoreCase("/go")) {
-            if (args.length > 0) {
+            if (args.length == 0) {
                 sender.sendMessage(ChatColor.RED + "please write integer argument");
             }
             else {
